@@ -1,0 +1,24 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.snap-y {
+  scroll-snap-type: y mandatory;
+}
+
+.snap-start {
+  scroll-snap-align: start;
+}
+
+.overflow-y-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.overflow-y-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

@@ -1,106 +1,167 @@
-import React from "react";
-import profileImg from "../assets/profile.jpeg"; // make sure the path is correct
+import React from 'react'
+import { motion } from 'framer-motion'
+import { FaGithub, FaLinkedin, FaTiktok, FaInstagram, FaDownload } from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
+import profileImg from '../assets/profile.jpeg'
+import resumePDF from '../assets/Shahbaz Tofeeq.pdf'
 
 const Home = () => {
+  const navigate = useNavigate()
+
+  const socialLinks = [
+    {
+      icon: <FaLinkedin />,
+      url: "https://www.linkedin.com/in/shahbaz-tofeeq-2a18b9303/",
+      color: "hover:text-blue-600"
+    },
+    {
+      icon: <FaGithub />,
+      url: "https://github.com/shahbaz746",
+      color: "hover:text-gray-800"
+    },
+    {
+      icon: <FaTiktok />,
+      url: "https://www.tiktok.com/@shahbaz.rao05",
+      color: "hover:text-pink-600"
+    },
+    {
+      icon: <FaInstagram />,
+      url: "https://www.instagram.com/shahabaz.rao05",
+      color: "hover:text-purple-600"
+    }
+  ]
+
+  const handleViewWork = () => {
+    const portfolioSection = document.getElementById('portfolio')
+    if (portfolioSection) {
+      portfolioSection.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      navigate('/portfolio')
+    }
+  }
+
+  const handleDownloadCV = () => {
+    window.open(resumePDF, '_blank')
+  }
+
   return (
-    <section className="relative w-full bg-white py-20 flex flex-col md:flex-row justify-between items-center overflow-hidden">
-      {/* Floating Bubbles (behind everything) */}
-      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="bubble bg-green-400 top-10 left-20"></div>
-        <div className="bubble bg-blue-400 top-1/2 left-1/3"></div>
-        <div className="bubble bg-pink-400 top-1/4 left-2/3"></div>
-        <div className="bubble bg-yellow-400 top-3/4 left-1/4"></div>
-        <div className="bubble bg-purple-400 top-1/3 left-1/2"></div>
-      </div>
-
-      {/* Left Text Section */}
-      <div className="max-w-xl px-6 md:pl-24 text-center md:text-left md:mr-60">
-        <div className="mb-4 flex justify-center md:justify-start">
-          <span className="border border-green-500 text-green-500 px-4 py-1 rounded-full text-sm font-medium">
-            Welcome
-          </span>
-        </div>
-
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-          I have <span className="text-green-500">Creative Front-End</span>{" "}
-          <br /> Development Experience
-        </h1>
-
-        <p className="text-gray-600 mt-4">
-          I’m <strong>Shahbaz</strong>, a passionate Front-End Developer with 1
-          year of experience creating responsive and modern web interfaces using{" "}
-          <strong>React.js</strong>, <strong>Bootstrap</strong>, and{" "}
-          <strong>Tailwind CSS</strong>.
-        </p>
-
-        {/* Buttons */}
-        <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-          <button className="bg-green-500 text-white px-6 py-3 rounded-md font-medium hover:bg-green-600 hover:scale-105 transform transition duration-300">
-            Contact Me
-          </button>
-          <a
-            href="#portfolio"
-            className="flex items-center justify-center text-gray-800 font-medium hover:text-green-500 transition duration-300"
+    <div className="min-h-screen flex items-center bg-gradient-to-br from-gray-900 to-black text-white px-4 py-12">
+      <div className="max-w-7xl mx-auto w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          {/* Left Side - Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="order-2 md:order-1"
           >
-            View Portfolio{" "}
-            <span className="ml-1 text-2xl font-bold hover:translate-x-1 transform duration-300">
-              ↗
-            </span>
-          </a>
+            <motion.h1 
+              className="text-5xl md:text-7xl font-bold mb-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              Shahbaz Tofeeq
+            </motion.h1>
+            
+            <motion.h2 
+              className="text-xl md:text-2xl text-gray-400 mb-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+            >
+              Frontend Developer at ERSTech
+            </motion.h2>
+
+            <motion.p
+              className="text-lg text-gray-300 mb-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              Passionate frontend developer with 1 year of hands-on experience in creating responsive 
+              and user-friendly web applications. Currently crafting innovative solutions at ERSTech, 
+              specializing in modern web interfaces using React and related technologies.
+            </motion.p>
+
+            <motion.div 
+              className="flex space-x-6 mb-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              {socialLinks.map((link, index) => (
+                <motion.a
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`text-3xl ${link.color} transition-colors duration-300`}
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  {link.icon}
+                </motion.a>
+              ))}
+            </motion.div>
+
+            <motion.div
+              className="flex flex-wrap gap-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.7 }}
+            >
+              <motion.button
+                onClick={handleViewWork}
+                className="px-8 py-3 bg-blue-600 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-300 flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span>View My Work</span>
+                <motion.span
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ repeat: Infinity, duration: 1.5 }}
+                >
+                  →
+                </motion.span>
+              </motion.button>
+              <motion.button
+                onClick={handleDownloadCV}
+                className="px-8 py-3 bg-transparent border-2 border-blue-600 rounded-full font-semibold hover:bg-blue-600/10 transition-colors duration-300 flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaDownload />
+                <span>Download CV</span>
+              </motion.button>
+            </motion.div>
+          </motion.div>
+
+          {/* Right Side - Image */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="order-1 md:order-2 flex justify-center items-center"
+          >
+            <motion.div
+              initial={{ scale: 0.5 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.2 }}
+              className="relative"
+            >
+              <div className="w-64 h-64 md:w-80 md:h-80 rounded-full bg-blue-600/20 absolute top-4 left-4 blur-xl" />
+              <img 
+                src={profileImg} 
+                alt="Shahbaz Tofeeq" 
+                className="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover border-4 border-blue-600 relative z-10 shadow-xl"
+              />
+            </motion.div>
+          </motion.div>
         </div>
       </div>
+    </div>
+  )
+}
 
-      {/* Right Image Section */}
-      <div className="relative mt-12 md:mt-0 md:mr-60">
-        <div className="bg-green-500 w-72 h-80 md:w-80 md:h-96 rounded-md"></div>
-        <img
-          src={profileImg}
-          alt="Shahbaz"
-          className="absolute top-5 left-5 w-72 h-80 md:w-80 md:h-96 object-cover rounded-md border-4 border-white shadow-lg hover:scale-105 transform transition duration-300"
-        />
-      </div>
-
-      {/* Social Links */}
-      <div className="hidden md:flex flex-col items-center absolute right-6 top-1/3 space-y-4">
-        <span className="text-gray-700 text-sm font-medium rotate-90 mb-8 tracking-wide">
-          Follow me on:
-        </span>
-
-        <a
-          href="https://www.instagram.com/shahbaz.rao05"
-          target="_blank"
-          rel="noreferrer"
-          className="text-pink-500 hover:text-pink-600 transform hover:scale-125 transition duration-300"
-        >
-          <i className="fab fa-instagram text-xl"></i>
-        </a>
-        <a
-          href="https://www.tiktok.com/@shahbaz.rao05?_t=ZS-90uBbZBQZLo&_r=1"
-          target="_blank"
-          rel="noreferrer"
-          className="text-black hover:text-gray-700 transform hover:scale-125 transition duration-300"
-        >
-          <i className="fab fa-tiktok text-xl"></i>
-        </a>
-        <a
-          href="https://www.linkedin.com/in/shahbaz-tofeeq-2a18b9303/"
-          target="_blank"
-          rel="noreferrer"
-          className="text-blue-600 hover:text-blue-700 transform hover:scale-125 transition duration-300"
-        >
-          <i className="fab fa-linkedin-in text-xl"></i>
-        </a>
-        <a
-          href="https://github.com"
-          target="_blank"
-          rel="noreferrer"
-          className="text-gray-800 hover:text-black transform hover:scale-125 transition duration-300"
-        >
-          <i className="fab fa-github text-xl"></i>
-        </a>
-      </div>
-    </section>
-  );
-};
-
-export default Home;
+export default Home

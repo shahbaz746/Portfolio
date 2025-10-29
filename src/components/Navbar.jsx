@@ -1,44 +1,101 @@
-import React from "react";
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { FaBars, FaTimes, FaDownload } from 'react-icons/fa'
+import { motion } from 'framer-motion'
+import resumePDF from '../assets/Shahbaz Tofeeq.pdf'
 
 const Navbar = () => {
-  return (
-    <nav className="relative w-full bg-white shadow-sm fixed top-0 left-0 z-50 overflow-hidden">
-      {/* Floating Bubbles */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="bubble bg-green-500 top-10 left-20"></div>
-        <div className="bubble bg-blue-500 top-1/2 left-1/3"></div>
-        <div className="bubble bg-red-500 top-1/4 left-2/3"></div>
-        <div className="bubble bg-gray-400 top-3/4 left-1/4"></div>
-        <div className="bubble bg-blue-600 top-1/3 left-1/2"></div>
-      </div>
+  const [isOpen, setIsOpen] = useState(false)
 
-      {/* Navbar Content */}
-      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        {/* Logo */}
-        <div className="flex items-center space-x-2">
-          <div className="bg-green-500 text-white font-bold text-xl rounded-md w-8 h-8 flex items-center justify-center">
-            S
+  const navItems = [
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
+    { name: 'Contact', path: '/contact' },
+    { name: 'Skills', path: '/skills' },
+    { name: 'Projects', path: '/projects' },
+    { name: 'Portfolio', path: '/portfolio' },
+  ]
+
+  const handleResumeClick = () => {
+    window.open(resumePDF, '_blank')
+  }
+
+  return (
+    <nav className="fixed w-full bg-gray-900/95 backdrop-blur-sm z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link to="/" className="text-blue-500 font-mono text-2xl font-bold">
+            &lt;SHAHBAZ/&gt;
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-4">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.path}
+                className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+              >
+                {item.name}
+              </Link>
+            ))}
+            <motion.button
+              onClick={handleResumeClick}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors duration-200 flex items-center gap-2"
+            >
+              <FaDownload className="text-sm" />
+              <span>Resume</span>
+            </motion.button>
           </div>
-          <span className="text-xl font-semibold text-gray-800">
-            Shahbaz<span className="text-green-500">Agency</span>
-          </span>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-gray-400 hover:text-white"
+            >
+              {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+            </button>
+          </div>
         </div>
 
-        {/* Nav Links */}
-        <ul className="hidden md:flex space-x-8 text-gray-700 font-medium">
-          <li className="hover:text-green-500 cursor-pointer">About</li>
-          <li className="hover:text-green-500 cursor-pointer">Skills</li>
-          <li className="hover:text-green-500 cursor-pointer">Portfolio</li>
-          <li className="hover:text-green-500 cursor-pointer">Testimonial</li>
-        </ul>
-
-        {/* Button */}
-        <button className="border-2 border-green-500 text-green-500 px-4 py-2 rounded-md hover:bg-green-500 hover:text-white transition duration-300">
-          Download CV
-        </button>
+        {/* Mobile Navigation */}
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="md:hidden"
+          >
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {navItems.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.path}
+                  className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+              <motion.button
+                onClick={handleResumeClick}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center gap-2"
+              >
+                <FaDownload className="text-sm" />
+                <span>Resume</span>
+              </motion.button>
+            </div>
+          </motion.div>
+        )}
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar
