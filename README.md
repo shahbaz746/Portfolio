@@ -1,16 +1,66 @@
-# React + Vite
+# Personal Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and responsive personal portfolio website built using **React** and **Tailwind CSS**. This portfolio showcases my **resume, work experiences, projects, and other content**, providing a professional and interactive way to present my skills and achievements.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+- **Resume Showcase**: Display your professional experiences and education.
+- **Projects Section**: Highlight your projects and achievements.
+- **Responsive Design**: Fully responsive layout for mobile, tablet, and desktop.
+- **Modern UI**: Built with Tailwind CSS for a clean and modern look.
+- **Easy to Customize**: Add or update your content easily.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠 Technologies Used
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React** – Front-end JavaScript library for building UI.
+- **Tailwind CSS** – Utility-first CSS framework for styling.
+- **JavaScript (ES6+)** – Dynamic and interactive behavior.
+- **React Router** – For navigation between different sections/pages.
+
+---
+
+## 📁 Project Structure
+
+portfolio/
+├─ public/
+├─ src/
+│ ├─ components/ # Reusable UI components
+│ ├─ pages/ # Portfolio pages (Home, About, Projects, Contact)
+│ ├─ assets/ # Images, icons, resume PDF
+│ ├─ App.js # Main app component
+│ └─ index.js # Entry point
+├─ tailwind.config.js # Tailwind CSS configuration
+└─ package.json # Project dependencies
+
+
+---
+
+## ⚡ Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn package manager
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/portfolio.git
+
+# Navigate to the project directory
+cd portfolio
+
+# Install dependencies
+npm install
+# or
+yarn install
+
+# Start the development server
+npm start
+# or
+yarn start
